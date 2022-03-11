@@ -6,13 +6,11 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 
 const Header = () => {
     return (
-        <>
-            <Flex as='header' bg='tomato' w='100%' p={4} color='white' pos="fixed" zIndex={2}>
-                <Box p='2'>
-                    <Heading size='md'>Beer</Heading>
-                </Box>
-            </Flex>
-        </>
+        <Flex as='header' bg='tomato' w='100%' p={4} color='white' pos="fixed" zIndex={2}>
+            <Box p='2'>
+                <Heading size='md'>Beer</Heading>
+            </Box>
+        </Flex>
     );
 }
 
