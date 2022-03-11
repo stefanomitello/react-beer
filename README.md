@@ -1,3 +1,9 @@
+# React Beer Challenge
+
+Challege based on this Gist: https://gist.github.com/stefanodotit/66877f311a817be0290df6f0352a623a
+
+_________________________________________________________________________________________
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
