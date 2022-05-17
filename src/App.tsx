@@ -18,22 +18,35 @@ function App() {
   let count: number = 0;
 
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = () => {
     axios
       .get<Beer[]>("https://api.punkapi.com/v2/beers/random")
       .then(response => {
-        console.log("get: ", response.data)
-        //setBeers(response.data);
+
+        let brewed_year;
+        let brewed_month;
+
+
+        if (response.data[0].first_brewed.includes("/")) {
+          [brewed_month, brewed_year] = response.data[0].first_brewed.split("/");
+
+        } else {
+          brewed_month = "0";
+          brewed_year = response.data[0].first_brewed
+        }
+
+        response.data[0].brewed_year = brewed_year;
+        response.data[0].brewed_month = brewed_month;
+
         setBeers(old => [...old, ...response.data]);
+
+
+
         count = count + 1
-        if (count !== 30) {
+        if (count < 30) {
           //alert(count)
           fetchData()
-        };
+        }
       }).catch(ex => {
         const error =
           ex.response.status === 404
@@ -44,6 +57,24 @@ function App() {
   }
 
 
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+
+    if (beers.length === 30) {
+      const pippo = beers.sort((a, b) => +(a.brewed_year + a.brewed_month) - +(b.brewed_year + b.brewed_month))
+    }
+
+
+  }, [beers]);
+
+
+
   return (
     <>
       <Header />
@@ -51,16 +82,16 @@ function App() {
       <Container mt={20} maxW='container.xl' className='container'>
 
         {error && <p className="error">{error}</p>}
-        {console.log("stato: ", beers)}
-        {beers.map((beer) => (
+
+        {console.log("hook beer", beers)}
+
+        {beers.map(({ id, name, tagline, image_url, brewed_month, brewed_year }) => (
           <>
-            <Card title={beer.name} tagline={beer.tagline} imageUrl={beer.image_url} first_brewed={beer.first_brewed} />
+            <Card title={name} tagline={tagline} imageUrl={image_url} key={id} year_brewed={brewed_year} month_brewed={brewed_month} />
           </>
 
         ))}
       </Container>
-
-
 
 
 

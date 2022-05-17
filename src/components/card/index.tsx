@@ -3,16 +3,16 @@ import './style.css'
 
 import { Box, Image } from "@chakra-ui/react";
 
-
-
 type Beer = {
     title: string;
     tagline: string;
     imageUrl: string;
-    first_brewed: string;
+
+    year_brewed: string;
+    month_brewed: string;
 }
 
-const Card = ({ title, tagline, imageUrl, first_brewed }: Beer) => {
+const Card = ({ title, tagline, imageUrl, year_brewed, month_brewed }: Beer) => {
 
     return (
 
@@ -34,7 +34,7 @@ const Card = ({ title, tagline, imageUrl, first_brewed }: Beer) => {
                 <Box>
                     {tagline}
 
-                    <li>Prodotto il: {first_brewed}</li>
+                    <li>Prodotto il: {month_brewed} / {year_brewed}</li>
                 </Box>
             </Box>
         </Box>

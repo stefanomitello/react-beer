@@ -83,4 +83,7 @@ export interface Beer {
     food_pairing: string[];
     brewers_tips: string;
     contributed_by: string;
+    brewed_year: string;
+    brewed_month: string;
+
 }
